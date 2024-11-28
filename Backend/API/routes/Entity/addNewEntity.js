@@ -161,16 +161,17 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const pool = require("../../db");
 const router = express.Router();
+const cors = require("cors");
 require("dotenv").config(); // Load environment variables from .env file
 
 // Email configuration using Hostinger's SMTP
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com", // Hostinger's SMTP server
-  port: 465, // Port for SSL
+  host: process.env.SMTP_HOST, // Hostinger's SMTP server
+  port: process.env.PORT, // Port for SSL
   secure: true, // Use SSL
   auth: {
-    user: "team.solardl@antsai.in", // Your email account
-    pass: "TEamSOlarDL12301#", // Your email password
+    user: process.env.USER, // Your email account
+    pass: process.env.PASS, // Your email password
   },
 });
 

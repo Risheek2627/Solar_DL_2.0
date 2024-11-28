@@ -179,12 +179,12 @@ require("dotenv").config();
 
 // Email configuration
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
-  port: 465,
-  secure: true,
+  host: process.env.SMTP_HOST, // Hostinger's SMTP server
+  port: process.env.PORT, // Port for SSL
+  secure: true, // Use SSL
   auth: {
-    user: "team.solardl@antsai.in",
-    pass: "TEamSOlarDL12301#",
+    user: process.env.USER, // Your email account
+    pass: process.env.PASS, // Your email password
   },
 });
 
@@ -336,11 +336,9 @@ router.post("/addPlant", async (req, res) => {
           "Sysadmin user not found for the given entity ID:",
           entityid
         );
-        return res
-          .status(404)
-          .json({
-            message: "Sysadmin user not found for the given entity ID.",
-          });
+        return res.status(404).json({
+          message: "Sysadmin user not found for the given entity ID.",
+        });
       }
       const sysadminUserId = sysadminUser[0].user_id;
       const sysadminEmail = sysadminUser[0].email;
